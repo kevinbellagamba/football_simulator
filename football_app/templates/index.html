@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football</title>
+</head>
+<body>
+    <h1>Football Simulator</h1>
+    {% if request.session.name == False %}
+    <form action="/name" method="post">
+        {% csrf_token %}
+        <h2>Name your team</h2>
+        <label for="name">Team Name:</label>
+        <input type="text" name="name" id="name">
+        <input type="submit" value="Submit Team Name">
+    </form>
+    {% else %}
+    <h3>The team on offense is {{request.session.name}}</h3>
+    <form action="/play" method="POST">
+        {% csrf_token %}
+        <label for="type">Play Choice</label>
+        <select name="type" id="">
+            <option value="run">Run the ball</option>
+            <option value="pass">Pass the ball</option>]
+            <option value="hailmary">Throw the ball down field</option>
+        </select>
+        <input type="submit" value="hike">
+    </form>
+    <table style="border: 2px solid black">
+        <tr>
+            <th>Down</th>
+            <th>To Go</th>
+            <th>Distance to End Zone</th>
+        </tr>
+        <tr>
+            <td>{{request.session.down}}</td>
+            <td>{{request.session.toGo}}</td>
+            <td>{{request.session.endZone}}</td>
+        </tr>
+    </table>
+    {% endif %}
+    <a href="/reset">Reset</a>
+</body>
+</html>
