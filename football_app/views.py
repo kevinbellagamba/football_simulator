@@ -28,13 +28,14 @@ def play(request):
             request.session['endZone'] -= passDistance
             request.session['toGo'] -= passDistance
     if request.POST['type'] == 'hailmary':
-        accuracy = random.randint(0,60)
-        defense = random.randint(0,50)
+        accuracy = random.randint(0,50)
+        defense = random.randint(0,100)
         if accuracy > defense:
             passDistance = random.randint(35,60)
             request.session['endZone'] -= passDistance
             request.session['toGo'] -= passDistance
     if request.session['endZone'] <= 0:
+        request.session['endZone'] = 0
         return HttpResponse("Touchdown")
     if request.session['toGo'] <= 0:
         request.session['toGo'] = 10
