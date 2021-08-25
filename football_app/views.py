@@ -38,6 +38,7 @@ def play(request):
         return HttpResponse("Touchdown")
     if request.session['toGo'] <= 0:
         request.session['toGo'] = 10
+        request.session['down'] = 1
     else:
         request.session['down'] += 1
     if request.session['down'] > 4:
